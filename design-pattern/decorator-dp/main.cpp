@@ -2,6 +2,7 @@
 #include "simple_coffee.h"
 #include "milk_decorator.h"
 #include "sugar_decorator.h"
+#include "addon_decorator.h"
 
 void printCoffeeDetails(const Coffee& coffee) {
     std::cout << "Description: " << coffee.getDescription() << std::endl;
@@ -25,8 +26,13 @@ int main() {
     std::cout << "Coffee with Milk and Sugar:" << std::endl;
     printCoffeeDetails(*milkAndSugarCoffee);
 
+    // Add Addon to the coffee with milk
+    Coffee* finalCoffee = new AddonDecorator(milkAndSugarCoffee);
+    std::cout << "Coffee with Milk and Sugar:" << std::endl;
+    printCoffeeDetails(*finalCoffee);
+
     // Clean up
-    delete milkAndSugarCoffee; // This will delete all the decorators and the base coffee
+    delete finalCoffee; // This will delete all the decorators and the base coffee
 
     return 0;
 } 
